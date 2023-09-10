@@ -6,13 +6,17 @@
 
   background-size: cover;
 }
+
 #title {
-  margin-right: 120px;
+  margin-right: 140px;
 }
+
 #subtitle {
   font-size: 20px;
-  margin-bottom: 4px;
+  margin-bottom: 20px;
 }
+
+
 .login-form {
   min-width: 150px;
   max-width: 500px;
@@ -21,4 +25,52 @@
 
 .login-full-width {
   width: 100%;
+}
+
+#mobile:invalid {
+  animation: shake 0.2s ;
+}
+
+div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+
+@keyframes shake {
+  25% {
+    translate: 6px 0;
+  }
+  50% {
+    translate: -6px 0;
+  }
+  75% {
+    translate: 6px 0;
+  }
+}
+
+@media screen and (max-width:653px){
+  .login-card {
+    max-width: 400px;
+  }
+  .login-form {
+    min-width: 100px;
+    max-width: 300px;
+    width: 100%;
+  }
+  #title {
+    margin-right: 90px;
+    margin-bottom: 20px;
+  }
+  #button {
+    margin-right: 62px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .btn {
+    margin: 0px -2px 0px 10px;
+  }
 }

@@ -8,13 +8,20 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(public fb: FormBuilder) {}
-  loginForm = this.fb.group({
-    mobile: ['',Validators.required],
-    password: [''],
-  });
+    mobile=new FormControl ('',[Validators.required,Validators.pattern('[0-9]*'),Validators.minLength(11),Validators.maxLength(11)]);
+    password=new FormControl('',[Validators.required,Validators.minLength(6)]);
+
   show() {
-    console.log(this.loginForm.value);
+    if(this.mobile.errors) {
+      alert('لطفا اطلاعات را درست وارد نمایید');
+    }
+    else if(this.password.errors){
+      alert('لطفا اطلاعات را درست وارد نمایید');
+    }
+    else{
+      console.log(this.mobile.value);
+      console.log(this.password.value);
+    }
   }
   matcher = new MyErrorStateMatcher();
 }
