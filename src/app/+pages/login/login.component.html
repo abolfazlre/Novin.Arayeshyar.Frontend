@@ -9,7 +9,7 @@
       <mat-form-field class="login-full-width">
         <mat-label>شماره موبایل</mat-label>
         <input id="mobile" dir="ltr" maxlength="11" pattern="[0-9]*" type="text" matInput [formControl]="mobile" [errorStateMatcher]="matcher"  placeholder="091">
-        <mat-icon matSuffix>phone</mat-icon>
+        <!-- <mat-icon matSuffix>phone</mat-icon> -->
         <mat-error *ngIf="mobile.hasError('required')">شماره موبایل باید وارد شود</mat-error>
         <mat-error *ngIf="mobile.hasError('pattern')">فقط باید عدد وارد شود</mat-error>
         <mat-error *ngIf="mobile.hasError('minlength')">شماره تلفن غلط وارد شده است.</mat-error>
@@ -27,7 +27,7 @@
     </form>
   </mat-card-content>
   <mat-card-actions id="button">
-    <button class="btn" mat-raised-button (click)="show()">ورود</button>
+    <button [disabled]="!mobile.valid && !password.valid" mat-raised-button (click)="show()">ورود</button>
     <button class="btn" mat-raised-button [routerLink]="'/register'">ثبت نام</button>
   </mat-card-actions>
 </mat-card>

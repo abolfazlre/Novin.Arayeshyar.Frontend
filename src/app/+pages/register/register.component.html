@@ -1,1 +1,53 @@
-<p>register works!</p>
+<div>
+<form [formGroup]="registerForm" class="register-form">
+  <mat-form-field class="register-full-width">
+    <mat-label>اسم کامل</mat-label>
+    <input id="fullname" type="text" matInput formControlName="fullname" [errorStateMatcher]="matcher"  placeholder="">
+    <mat-error *ngIf="registerForm.controls.fullname.hasError('required')">اسم کامل الزامی است</mat-error>
+    <mat-error *ngIf="registerForm.controls.fullname.hasError('pattern')">فقط باید متن وارد شود</mat-error>
+    <mat-error *ngIf="registerForm.controls.fullname.hasError('minlength')"></mat-error>
+    <mat-hint>اسم کامل خود را وارد کنید</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="register-full-width">
+    <mat-label>شماره موبایل</mat-label>
+    <input id="mobile" dir="ltr" maxlength="11" type="text" matInput formControlName="mobile" [errorStateMatcher]="matcher"  placeholder="091">
+    <mat-error *ngIf="registerForm.controls.mobile.hasError('required')">شماره موبایل باید وارد شود</mat-error>
+    <mat-error *ngIf="registerForm.controls.mobile.hasError('pattern')">فقط باید عدد وارد شود</mat-error>
+    <mat-error *ngIf="registerForm.controls.mobile.hasError('minlength')">شماره تلفن غلط وارد شده است.</mat-error>
+    <mat-error *ngIf="registerForm.controls.mobile.hasError('maxlength')">شماره تلفن غلط وارد شده است.</mat-error>
+    <mat-hint>شماره مخصوص خود را وارد کنید</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="register-full-width">
+    <mat-label>کلمه عبور</mat-label>
+    <input id="password" type="password" matInput formControlName="password" [errorStateMatcher]="matcher"  placeholder="رمز عبور خود را وارد کنید">
+    <mat-error *ngIf="registerForm.controls.password.hasError('required')">رمز عبور الزامی است</mat-error>
+    <mat-error *ngIf="registerForm.controls.password.hasError('minlength')">حداقل باید شش حرف باشد</mat-error>
+    <mat-hint>کلمه عبور محرمانه خود را وارد کنید</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="register-full-width">
+    <mat-label>تکرار کلمه عبور</mat-label>
+    <input id="repassword" type="password" matInput formControlName="repassword" [errorStateMatcher]="matcher"  placeholder="تکرار رمز عبور خود را وارد کنید">
+    <mat-error *ngIf="registerForm.controls.repassword.hasError('required')">تکرار رمز عبور الزامی است</mat-error>
+    <mat-error *ngIf="registerForm.controls.repassword.hasError('minlength')">حداقل باید شش حرف باشد</mat-error>
+    <mat-hint>تکرار کلمه عبور</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="register-full-width">
+    <mat-label>آدرس</mat-label>
+    <input id="address" type="text" matInput formControlName="address" [errorStateMatcher]="matcher"  placeholder="آدرس خود را وارد کنید">
+    <mat-error *ngIf="registerForm.controls.address.hasError('required')">وارد کردن آدرس الزامی است</mat-error>
+    <mat-hint>آدرس کامل خود را وارد کنید</mat-hint>
+  </mat-form-field>
+
+  <mat-radio-group formControlName="type" aria-label="Select an option" id="type">
+    <mat-radio-button value="مشتری">مشتری</mat-radio-button>
+    <mat-radio-button value="آرایشگر">آرایشگر</mat-radio-button>
+  </mat-radio-group>
+
+  <button class="btn" mat-raised-button color="primary" (click)="show()">ثبت نام</button>
+
+</form>
+</div>
