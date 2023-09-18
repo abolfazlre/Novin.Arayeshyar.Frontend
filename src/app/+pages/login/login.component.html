@@ -8,12 +8,11 @@
     <form class="login-form">
       <mat-form-field class="login-full-width">
         <mat-label>شماره موبایل</mat-label>
-        <input id="mobile" dir="ltr" maxlength="11" pattern="[0-9]*" type="text" matInput [formControl]="mobile" [errorStateMatcher]="matcher"  placeholder="091">
+        <input (keypress)="mobilepress($event)" id="mobile" dir="ltr" maxlength="11" pattern="[0-9]*" type="text" matInput [formControl]="mobile" [errorStateMatcher]="matcher"  placeholder="091">
         <!-- <mat-icon matSuffix>phone</mat-icon> -->
         <mat-error *ngIf="mobile.hasError('required')">شماره موبایل باید وارد شود</mat-error>
         <mat-error *ngIf="mobile.hasError('pattern')">فقط باید عدد وارد شود</mat-error>
         <mat-error *ngIf="mobile.hasError('minlength')">شماره تلفن غلط وارد شده است.</mat-error>
-        <mat-error *ngIf="mobile.hasError('maxlength')">شماره تلفن غلط وارد شده است.</mat-error>
         <mat-hint>شماره مخصوص خود را وارد کنید</mat-hint>
       </mat-form-field>
       <mat-form-field class="login-full-width">

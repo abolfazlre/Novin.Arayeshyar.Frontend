@@ -13,22 +13,22 @@ export class RegisterComponent {
 
   registerForm=this.fb.group({
     type:['',Validators.required],
-    fullname:['',[Validators.required,Validators.pattern("[ا-یa-zA-Z ]*"),Validators.minLength(5)]],
-    mobile:['',[Validators.required,Validators.minLength(11),Validators.maxLength(11),Validators.pattern("[0-9]*")]],
+    fullname:['',[Validators.required,Validators.pattern("[آ-ی ]*"),Validators.minLength(5)]],
+    mobile:['',[Validators.required,Validators.minLength(11),Validators.pattern("[0-9]*")]],
     password:['',[Validators.required,Validators.minLength(6),]],
     repassword:['',[Validators.required,Validators.minLength(6)]],
     address:['',[Validators.required]],
   })
 
   show(){
-    if(this.registerForm.controls.password.value==this.registerForm.controls.repassword.value){
+    if(this.control.password.value==this.control.repassword.value){
       if(this.registerForm.valid){
-        console.log('mobile:' + this.registerForm.value.mobile);
-        console.log('fullname:' + this.registerForm.value.fullname);
-        console.log('type:' + this.registerForm.value.type);
-        console.log('password:' + this.registerForm.value.password);
-        console.log('repassword:' + this.registerForm.value.repassword);
-        console.log('address:' + this.registerForm.value.address);
+        console.log('mobile:' + this.content.mobile);
+        console.log('fullname:' + this.content.fullname);
+        console.log('type:' + this.content.type);
+        console.log('password:' + this.content.password);
+        console.log('repassword:' + this.content.repassword);
+        console.log('address:' + this.content.address);
       }
     }
     else{
@@ -36,8 +36,32 @@ export class RegisterComponent {
     }
   }
 
+  mobilePress(key:KeyboardEvent)
+  {
+    if(!(key.key>='0' && key.key<='9')){
+      key.preventDefault();
+    }
+  }
+
+  namePress(key:KeyboardEvent)
+  {
+    if(key.key==' '){
+      return;
+    }
+
+    if(!(key.key>='آ' && key.key<='ی')){
+      key.preventDefault();
+    }
+  }
+
   matcher = new MyErrorStateMatcher();
 
+  get control(){
+    return this.registerForm.controls;
+  }
+  get content(){
+    return this.registerForm.value;
+  }
 }
 // this.registerForm.controls.password==this.registerForm.controls.repassword
 

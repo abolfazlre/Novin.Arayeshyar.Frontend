@@ -8,7 +8,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-    mobile=new FormControl ('',[Validators.required,Validators.pattern('[0-9]*'),Validators.minLength(11),Validators.maxLength(11)]);
+    mobile=new FormControl ('',[Validators.required,Validators.pattern('[0-9]*'),Validators.minLength(11)]);
     password=new FormControl('',[Validators.required,Validators.minLength(6)]);
 
   show() {
@@ -23,8 +23,18 @@ export class LoginComponent {
       console.log(this.password.value);
     }
   }
+
   matcher = new MyErrorStateMatcher();
+
+  mobilepress(key:KeyboardEvent)
+  {
+    if(!(key.key>='0' && key.key<='9')){
+      key.preventDefault();
+    }
+  }
+
 }
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
