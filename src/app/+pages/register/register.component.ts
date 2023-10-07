@@ -1,74 +1,104 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  constructor(private fb: FormBuilder) {}
 
-  constructor(private fb:FormBuilder){}
+  registerForm = this.fb.group({
+    type: ['', Validators.required],
+    fullname: [
+      '',
+      [
+        Validators.pattern('[آ-ی ]*'),
+        Validators.minLength(5),
+      ],
+    ],
+    mobile: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(11),
+        Validators.pattern('[0-9]*'),
+      ],
+    ],
+    password: ['', [Validators.required, Validators.minLength(6)]],
 
-  registerForm=this.fb.group({
-    type:['',Validators.required],
-    fullname:['',[Validators.required,Validators.pattern("[آ-ی ]*"),Validators.minLength(5)]],
-    mobile:['',[Validators.required,Validators.minLength(11),Validators.pattern("[0-9]*")]],
-    password:['',[Validators.required,Validators.minLength(6),]],
-    repassword:['',[Validators.required,Validators.minLength(6)]],
-    address:['',[Validators.required]],
-  })
+    birthDate:['']
+  });
 
-  show(){
-    if(this.control.password.value==this.control.repassword.value){
-      if(this.registerForm.valid){
-        console.log('mobile:' + this.content.mobile);
-        console.log('fullname:' + this.content.fullname);
-        console.log('type:' + this.content.type);
-        console.log('password:' + this.content.password);
-        console.log('repassword:' + this.content.repassword);
-        console.log('address:' + this.content.address);
-      }
-    }
-    else{
-      alert('رمز عبور با تکرار آن مشابه نیست.');
+  show() {
+    if (this.registerForm.valid) {
+      console.log('mobile:' + this.content.mobile);
+      console.log('fullname:' + this.content.fullname);
+      console.log('type:' + this.content.type);
+      console.log('password:' + this.content.password);
+      console.log('birthDate:' + this.content.birthDate);
     }
   }
 
-  mobilePress(key:KeyboardEvent)
-  {
-    if(!(key.key>='0' && key.key<='9')){
+  mobilePress(key: KeyboardEvent) {
+    if (!(key.key >= '0' && key.key <= '9')) {
       key.preventDefault();
     }
   }
 
-  namePress(key:KeyboardEvent)
-  {
-    if(key.key==' '){
+  namePress(key: KeyboardEvent) {
+    if (key.key == ' ') {
       return;
     }
 
-    if(!(key.key>='آ' && key.key<='ی')){
+    if (!(key.key >= 'آ' && key.key <= 'ی')) {
       key.preventDefault();
     }
   }
 
   matcher = new MyErrorStateMatcher();
 
-  get control(){
+  get control() {
     return this.registerForm.controls;
   }
-  get content(){
+  get content() {
     return this.registerForm.value;
   }
 }
-// this.registerForm.controls.password==this.registerForm.controls.repassword
-
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
+}
+
+export class DatepickerDateClassExample {
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    // Only highligh dates inside the month view.
+    if (view === 'month') {
+      const date = cellDate.getDate();
+
+      // Highlight the 1st and 20th day of each month.
+      return date === 1 || date === 20 ? 'example-custom-date-class' : '';
+    }
+
+    return '';
+  };
 }

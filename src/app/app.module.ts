@@ -13,6 +13,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { RegisterComponent } from './+pages/register/register.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatRadioModule
+    MatRadioModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

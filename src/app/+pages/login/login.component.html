@@ -5,16 +5,28 @@
     <mat-card-subtitle id="subtitle">ورود یا ثبت نام</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+
     <form class="login-form">
-      <mat-form-field class="login-full-width">
+
+      <!-- <mat-form-field class="login-full-width">
         <mat-label>شماره موبایل</mat-label>
         <input (keypress)="mobilepress($event)" id="mobile" dir="ltr" maxlength="11" pattern="[0-9]*" type="text" matInput [formControl]="mobile" [errorStateMatcher]="matcher"  placeholder="091">
-        <!-- <mat-icon matSuffix>phone</mat-icon> -->
+        <mat-icon matSuffix>phone</mat-icon>
         <mat-error *ngIf="mobile.hasError('required')">شماره موبایل باید وارد شود</mat-error>
         <mat-error *ngIf="mobile.hasError('pattern')">فقط باید عدد وارد شود</mat-error>
         <mat-error *ngIf="mobile.hasError('minlength')">شماره تلفن غلط وارد شده است.</mat-error>
         <mat-hint>شماره مخصوص خود را وارد کنید</mat-hint>
+      </mat-form-field> -->
+
+      <mat-form-field class="login-full-width" dir="ltr">
+        <mat-label>شماره موبایل</mat-label>
+        <span matPrefix>+98 &nbsp;</span>
+        <input (keypress)="mobilepress($event)" id="mobile" maxlength="11" pattern="[0-9]*" type="tel" matInput placeholder="0918-000-0000" [errorStateMatcher]="matcher" [formControl]="mobile">
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="mobile.hasError('required')">شماره موبایل باید وارد شود</mat-error>
+        <mat-error *ngIf="mobile.hasError('minlength')">شماره تلفن غلط وارد شده است.</mat-error>
       </mat-form-field>
+
       <mat-form-field class="login-full-width">
         <mat-label>رمز عبور</mat-label>
         <input id="password" type="password" matInput [formControl]="password" [errorStateMatcher]="matcher" placeholder="رمز عبور خود را وارد کنید">
@@ -23,7 +35,9 @@
         <mat-error *ngIf="password.hasError('minlength')">رمز عبور حداقل باید شش حرف باشد</mat-error>
         <mat-hint>کلمه عبور محرمانه خاص خود را وارد کنید</mat-hint>
       </mat-form-field>
+
     </form>
+
   </mat-card-content>
   <mat-card-actions id="button">
     <button [disabled]="!mobile.valid && !password.valid" mat-raised-button (click)="show()">ورود</button>

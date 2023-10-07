@@ -1,21 +1,28 @@
 <div>
 <form [formGroup]="registerForm" class="register-form">
+
   <mat-form-field class="register-full-width">
     <mat-label>اسم کامل</mat-label>
-    <input (keypress)="namePress($event)" id="fullname" type="text" matInput formControlName="fullname" [errorStateMatcher]="matcher"  placeholder="">
-    <mat-error *ngIf="control.fullname.hasError('required')">اسم کامل الزامی است</mat-error>
-    <!-- <mat-error *ngIf="control.fullname.hasError('pattern')">فقط باید متن وارد شود</mat-error> -->
+    <input (keypress)="namePress($event)" id="fullname" type="text" matInput formControlName="fullname" [errorStateMatcher]="matcher"  placeholder="اسم کامل خود را وارد کنید">
     <mat-error *ngIf="control.fullname.hasError('minlength')"></mat-error>
     <mat-hint>اسم کامل خود را وارد کنید</mat-hint>
   </mat-form-field>
 
   <mat-form-field class="register-full-width">
+    <mat-label>تاریخ تولد</mat-label>
+    <input id="date" matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="تاریخ تولد خود را وارد کنید">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="register-full-width" dir="ltr">
     <mat-label>شماره موبایل</mat-label>
-    <input (keypress)="mobilePress($event)" id="mobile" dir="ltr" maxlength="11" type="text" matInput formControlName="mobile" [errorStateMatcher]="matcher"  placeholder="091">
+    <span matPrefix>+98 &nbsp;</span>
+    <input (keypress)="mobilePress($event)" id="mobile" maxlength="11" type="tel" matInput placeholder="0918-000-0000" [errorStateMatcher]="matcher" formControlName="mobile">
+    <mat-icon matSuffix>phone</mat-icon>
     <mat-error *ngIf="control.mobile.hasError('required')">شماره موبایل باید وارد شود</mat-error>
-    <!-- <mat-error *ngIf="control.mobile.hasError('pattern')">فقط باید عدد وارد شود</mat-error> -->
     <mat-error *ngIf="control.mobile.hasError('minlength')">شماره تلفن غلط وارد شده است.</mat-error>
-    <mat-hint>شماره مخصوص خود را وارد کنید</mat-hint>
   </mat-form-field>
 
   <mat-form-field class="register-full-width">
@@ -26,25 +33,15 @@
     <mat-hint>کلمه عبور محرمانه خود را وارد کنید</mat-hint>
   </mat-form-field>
 
-  <mat-form-field class="register-full-width">
-    <mat-label>تکرار کلمه عبور</mat-label>
-    <input id="repassword" type="password" matInput formControlName="repassword" [errorStateMatcher]="matcher"  placeholder="تکرار رمز عبور خود را وارد کنید">
-    <mat-error *ngIf="control.repassword.hasError('required')">تکرار رمز عبور الزامی است</mat-error>
-    <mat-error *ngIf="control.repassword.hasError('minlength')">حداقل باید شش حرف باشد</mat-error>
-    <mat-hint>تکرار کلمه عبور</mat-hint>
-  </mat-form-field>
 
-  <mat-form-field class="register-full-width">
-    <mat-label>آدرس</mat-label>
-    <input id="address" type="text" matInput formControlName="address" [errorStateMatcher]="matcher"  placeholder="آدرس خود را وارد کنید">
-    <mat-error *ngIf="control.address.hasError('required')">وارد کردن آدرس الزامی است</mat-error>
-    <mat-hint>آدرس کامل خود را وارد کنید</mat-hint>
-  </mat-form-field>
 
-  <mat-radio-group formControlName="type" aria-label="Select an option" id="type">
-    <mat-radio-button value="مشتری">مشتری</mat-radio-button>
-    <mat-radio-button value="آرایشگر">آرایشگر</mat-radio-button>
-  </mat-radio-group>
+  <fieldset id="radio">
+    <mat-radio-group formControlName="type" aria-label="Select an option" id="type">
+      <mat-radio-button value="مشتری">مشتری</mat-radio-button>&nbsp;&nbsp;&nbsp;
+      <mat-radio-button value="آرایشگر">آرایشگر</mat-radio-button>&nbsp;&nbsp;&nbsp;
+      <mat-radio-button value="مالک">مالک آرایشگاه</mat-radio-button>&nbsp;&nbsp;&nbsp;
+    </mat-radio-group>
+  </fieldset>
 
   <button class="btn" mat-raised-button color="primary" (click)="show()">ثبت نام</button>
 
