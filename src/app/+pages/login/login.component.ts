@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +35,21 @@ export class LoginComponent {
     }
   }
 
+  constructor(public http:HttpClient, public router:Router){}
+
+  check()
+  {
+    this.http.post('https://localhost:7169/adminlogin',{username:this.mobile.value,password:this.password.value}).subscribe(result=>{
+      console.log(result);
+        if((result as any).isOk==true){
+          this.router.navigateByUrl('/dashboard');
+        }
+        else
+        {
+          alert("نام کاربری و رمز عبور غلط وارد شده است.");
+        }
+    });
+  }
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

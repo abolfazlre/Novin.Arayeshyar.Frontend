@@ -35,8 +35,8 @@ export class RegisterComponent {
       ],
     ],
     password: ['', [Validators.required, Validators.minLength(6)]],
-
-    birthDate:['']
+    birthDate:[''],
+    address:['']
   });
 
   show() {
@@ -46,6 +46,7 @@ export class RegisterComponent {
       console.log('type:' + this.content.type);
       console.log('password:' + this.content.password);
       console.log('birthDate:' + this.content.birthDate);
+      console.log('address:' + this.content.address);
     }
   }
 

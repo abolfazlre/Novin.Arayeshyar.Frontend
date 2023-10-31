@@ -40,8 +40,9 @@
 
   </mat-card-content>
   <mat-card-actions id="button">
-    <button [disabled]="!mobile.valid && !password.valid" mat-raised-button (click)="show()">ورود</button>
+    <button (click)="check()" [disabled]="!mobile.valid && !password.valid" mat-raised-button >ورود</button>
     <button class="btn" mat-raised-button [routerLink]="'/register'">ثبت نام</button>
   </mat-card-actions>
 </mat-card>
 </div>
+

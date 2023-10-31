@@ -33,6 +33,11 @@
     <mat-hint>کلمه عبور محرمانه خود را وارد کنید</mat-hint>
   </mat-form-field>
 
+  <mat-form-field class="register-full-width">
+    <mat-label>آدرس</mat-label>
+    <input id="address" type="text" matInput formControlName="address" [errorStateMatcher]="matcher"  placeholder="آدرس خود را وارد کنید">
+    <mat-hint>آدرس خود را وارد کنید</mat-hint>
+  </mat-form-field>
 
 
   <fieldset id="radio">
